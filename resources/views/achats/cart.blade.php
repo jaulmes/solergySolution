@@ -1,0 +1,212 @@
+@extends('dashboard.main')
+
+@section('content')
+
+<section class="h-100 h-custom">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="col-4 pt-1">
+            <a href="{{route('panier.monPanier')}}" class="text-mixted" style="position: fixed; margin-left: 70em;">panier<span class="badge badge-pill badge-dark" >{{ $quantite}} </span></a>
+        </div>
+
+      @if(session('message'))
+        <div class="alert alert-success">
+            {{session('message')}}
+        </div>
+        @endif
+
+        @if(session('erreur'))
+        <div class="alert alert-danger">
+            {{session('erreur')}}
+        </div>
+        @endif
+
+        <div class="table-responsive">
+          <div class="row row-cols-1 row-cols-md-6 g-4" >
+            @foreach($produits as $produit)
+            <div class="col" style="margin-bottom: 20px; margin-left: 5px; margin-right: -2em; ">
+              <div class="row " data-aos="fade-left" >
+                <div class="col-lg-10 col-md-6">
+                  <div class="card h-80" style="width:9em; " >
+                  
+                  @if($produit->getStock() ==="disponible")
+                    <strong class="badge  badge-info">{{$produit->getStock()}}</strong>
+                  @endif
+                  
+                  @if($produit->getStock() ==="indisponible")
+                    <strong class="badge  badge-danger">{{$produit->getStock()}}</strong>
+                  @endif
+                    
+                      <img src="{{asset('storage/images/produits/'.$produit->image_produit) ?? 'bjr'}}" class="img-fluid" alt="" style="height: 5em; width: 100%">
+                    
+                      <div class="member-info" style="font-size: 12px;">
+                        <h7 style="margin-bottom: -0.1em;"><u>Nom</u>: {{$produit->name}}</h7>
+                        <p class="card-text" style="margin-bottom: -0.1em;"><u>Desc</u>: {{$produit->getDescription()}}</p>
+                        <p class="card-text" style="margin-bottom: -0.1em; "><u>Prix</u>: <strong style="background-color:green"> {{$produit->getPrice()}}</strong>  </p>
+                        <div class="row" style="margin-left: 0.2em; padding-bottom: 0.01em; margin-top: 0.5em;">
+                          <a href="{{ route('produit.detail', $produit->id)}} ">
+                              <button class="btn btn-warning px-1" >
+                                <i class="bi bi-eye"></i>
+                              </button>
+                          </a>
+                          
+                          @if($produit->getStock() ==="disponible")
+                            <form action="{{ route('panier.ajouter') }}" method="post">
+                              @csrf
+                              <div class="action">
+                                <input type="hidden" name="id" value="{{$produit->id}}">
+                                <input type="hidden" name="name" value="{{$produit->name}}">
+                                <input type="hidden" name="price" value="{{$produit->price}}">
+                                <button class="add-to-cart btn btn-primary px-1" type="submit" style="margin-left: 2em; margin-top:-3.5em">
+                                  <i class="bi bi-plus"></i>
+                                </button>
+                              </div>
+                            </form>
+                          @endif
+                          
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+        </div>
+
+
+
+
+        <!--mon panier-->
+        <div  style="width:20em; position:absolute; margin-left:65em; margin-top:-30em; font-size:12px ">
+        
+        
+        <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+          <div class="card-body p-4">
+
+            <div class="row">
+              <h6><strong><u>Mon panier</u></strong></h6> <br>
+
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" class="h6">Nom</th>
+                <th scope="col">P U</th>
+                <th scope="col">QTE</th>
+                <th scope="col">Prix T</th>
+
+              </tr>
+            </thead>
+            <tbody>
+            @foreach( Cart::getContent()  as $produit)
+              <tr>
+                <th scope="row">
+                      <p class="mb-2">{{$produit->name}}</p>
+                </th>
+
+                <th class="align-middle">
+                  <p class="mb-0" style="font-weight: 500;">{{$produit->price}} </p>
+                </th>
+                <th class="align-middle">
+                  <p class="mb-0" style="font-weight: 500;">{{$produit->quantity}} </p>
+                </th>
+                <th class="align-middle">
+                  <p class="mb-0" style="font-weight: 500;">{{$produit->price * $produit->quantity}} </p>
+                </th>
+
+              </tr>
+            @endforeach
+              
+            </tbody>
+          </table>
+               
+            <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
+
+              <div class="col-lg-4 col-xl-3">
+                <div class="d-flex justify-content-between" style="font-weight: 500;">
+                  <p class="mb-2">total: </p>
+                  <p class="mb-2" style="margin-left: 10em;">{{ Cart::getTotal()}}  </p>
+                </div>
+              </div>
+
+
+                <!-- Button trigger modal -->
+                  <form action="{{url('detruire')}}" method="get">
+                    @csrf
+                    <button type="submit"  class="btn btn-danger" style="width: 8em; font-size:10px">
+                      vider le panier
+                    </button>
+                  </form>
+                  
+                  
+                  <button type="button" style="width: 8em; margin-left:10em; margin-top:-6.7em; font-size:10px"  class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                    Valider l'achat
+                  </button>
+
+                <!-- Modal -->
+                <form action="{{ route('achat.valider')}}" method="post">
+                  @csrf
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">enregistrement de l'achat'</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                          <div class="row">
+                            <div class="form-group">
+                              <label for="montantVerse">montant versé</label>
+                              <input class="form-control" type="number" name="montantVerse" id="montantVerse">
+                            </div>
+                            <div class="form-group">
+                                <label for="mode"> mode de paiement</label>
+                              <select class="form-control"  name="modePaiement" id="mode">
+                                <option selected disabled > mode de paiement</option>
+                                <option value="Orange Money">Orange Money</option>
+                                <option value="MTN MOMO">MTN MOMO</option>
+                                <option value="Cash">Cash</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="impot">Accepter</label>
+                              <input type="checkbox" name="impot" id="impot">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+            </div>
+
+          </div>
+        </div>
+        </div>
+        
+
+
+        
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+@endsection
+
+@section('javascript')
+
+@endsection
