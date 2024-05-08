@@ -22,7 +22,8 @@
         </div>
         @endif
 
-        <div class="table-responsive">
+        <div class="table-responsive"id="example1">
+
           <div class="row row-cols-1 row-cols-md-6 g-4" >
             @foreach($produits as $produit)
             <div class="col" style="margin-bottom: 20px; margin-left: 5px; margin-right: -2em; ">

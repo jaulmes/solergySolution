@@ -181,6 +181,7 @@ class PanierController extends Controller
     }
 
     public function afficheFacture(){
+        $numeroFacture = '';
         return view('panier.factures');
     }
 }

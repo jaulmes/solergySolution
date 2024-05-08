@@ -1,130 +1,155 @@
-<!DOCTYPE html> 
- <html lang="en">
-     <head> 
-        <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
-        <title>Solergy Solutions Invoice</title> 
-    </head> 
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture - Société X</title>
     <style>
-        
+        body{
+            margin-left: 4em;
+        }
+        div.title{
+            margin-left: 23em;
+        }
+        p.title{
+            text-align: center;
+        }
+        div.sous-title{
+            display:flex;
+            color: blue;
+            margin-left: 20em;
+            margin-top: -2.5em;
+        }
+        div.desc{
+            margin-left: 2em;
+            margin-right: 1em;
+        }
+        div.img{
+            height: 50px;
+            width: 50px;
+        }
+        div.contact{
+            margin-left: 20em; 
+        }
+
+
+
+
+
+        .services {
+            margin-top: 10em;
+            margin-left: 21em;
+            width: 60%;
+
+            
+        }
+        .services table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .services th, .services td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .total {
+            margin-top: 20px;
+        }
+        div.content{
+            background-image: url('logo.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.5;
+        }
     </style>
-    <body> 
+</head>
+<body>
+    <div class="title">
+       <h1 style=" font-size:xxx-large">
+            S <img src="{{ asset('logo.jpg')}}" alt="" style="width: 40px; height: 40px"> LERGY_SOLUTIONS <br>
+       </h1> 
+        <p ><h1 style="margin-left: 7.7em; margin-top: -1em">sarl</h1></p>
+    </div>
+    <div class="sous-title">
+        <div class="img1">
+            <img src="{{asset('img3.jpg')}}" alt="" style="position: relative; height: 6em">
+        </div>
+        <div class="desc">
+            <h2>
+                <strong style="font-family: 'Agency FB';">
+                    Prestations de services, Installation solaire, <br>
+                    Fourniture du matériel, Electricité bâtiment, <br>
+                    Domotique et systèmes innovants
+                </strong>
+            </h2>
 
 
-        <div class="container" style="margin-left:15em"> 
-            <div class="row"> 
-                <div class="col-12"> 
-                    <h1 class="text-center">SOLERGY_SOLUTIONS</h1> 
-                    <p class="text-center">SARL<br></p>
-
-                </div> 
-
-                
-            </div> 
-            <div class="row">
-                        <img src="{{asset('img1.jpg')}}" alt="" style="width: 10em ; height:10em">
-                        <p style="margin-left: 15em; color:aqua" >
-                        Prestations de services, Installation solaire<br>
-                        Fourniture du matériel, Electricité bâtiment<br>
-                        Domotique et systèmes innovants</p> 
-                        <img src="{{asset('img1.jpg')}}" alt="" style="width: 10em ; height:10em">
+        </div>
+        <div class="img2">
+            <img src="{{asset('img7.jpg')}}" alt="" style="position: relative; height: 6em">
+        </div>
+    </div>
+    <div class="contact">
+        <p style="margin-top: -0.5em;">
+            <strong >NIU: M092316074072K</strong> <strong style="margin-left: 2em;">facebook : facebook/solergysolutions</strong> <strong style="margin-left: 2em;">Contacts : 6 57 24 89 25</strong>
+        </p>
+        <p style="margin-top: -0.5em;">
+            <strong >Code marchand ORANGE MONEY : 80 08 89</strong>  <strong style="margin-left: 2em;">Email :solutionssolergy@gmail.com</strong>
+        </p>
+        <div style="margin-top: 2em;">
+            <p >
+                <strong>REF : CA_DLA_AVR_24_8</strong>  
+            </p>
+            <div style="display: flex;">
+                <div>
+                    <strong >Agent opérant : @auth {{ Auth::User()->name}}  @endauth</strong> <br > 
+                    <strong >TEL : 6 94 95 48 18</strong>
+                </div>
+                <div style="margin-left: 10em;">
+                    <strong >client :</strong> <br>
+                    <strong >TEL : 6 94 95 48 18</strong>
+                </div>
             </div>
-            <div class="row"> 
-                <div class="col-6"> 
-                    <p>NIU: MG92319074072K<br>Code marchant ORANGE MONEY:</p> 
-                </div> 
-                <div class="col-6 text-right"> 
-                    <p>Facebook: facebook/solergysolutions<br>
-                    Contacts: 0 37 24 89 25<br>
-                    Email: solergysolutions@gmail.com</p> 
-                </div> 
-            </div> 
-            <div class="row"> 
-                <div class="col-12"> 
-                    <p>REF: CL_DL_4_06_24_8<br>Client:<br>Agent opérant: Mr ANDRIATSIHOAVY</p> 
-                </div> 
-            </div> 
-            <div class="row"> 
-                <div class="col-6"> 
-                    <p>TEL: 0 34 69 48 18</p> 
-                </div> 
-                <div class="col-6 text-right"> 
-                    <p>Facture: (+237) 6<br>BP:<br>Email:</p> 
-                </div> 
-            </div> 
-            <div class="row"> 
-                <div class="col-12"> 
-                    <p>Douala, le 09 avril 2024<br>Ville: douala</p> 
-                </div> 
-            </div> 
-            <div class="row"> 
-                <div class="col-12"> 
-                    <h4>DEVIS INSTALLATION SOLAIRE</h4> 
-                    <p>Note : BACKUP HYBRIDE ET RETROFITAGE ELECTRIQUE DES APPARTMENTS</p> 
-                </div> 
-            </div> 
-            <div class="row"> 
-                <div class="col-12"> 
-                    <table class="table table-bordered"> 
-                        <thead> 
-                            <tr> 
-                                <th>quantité</th> 
-                                <th>équipements</th> 
-                                <th>Puissance unitaire (watt)</th> 
-                                <th>Puissance totale (watt)</th> 
-                                <th>Consommation quotidien (wh)</th> 
-                                <th>Energie (wattheures par jour)</th> 
-                            </tr> 
-                        </thead> 
-                        <tbody> 
-                            <tr> 
-                                <td>20</td> 
-                                <td>ampoules</td> 
-                                <td>15</td> 
-                                <td>300</td> 
-                                <td>8</td> 
-                                <td>2400</td> 
-                            </tr> 
-                            <tr> 
-                                <td>4</td> 
-                                <td>téléviseurs</td> 
-                                <td>90</td> 
-                                <td>360</td> 
-                                <td>8</td> 
-                                <td>2880</td> 
-                            </tr> 
-                            <tr> 
-                                <td>4</td> 
-                                <td>décodeurs</td> 
-                                <td>15</td> 
-                                <td>60</td> 
-                                <td>8</td> 
-                                <td>480</td> 
-                            </tr> 
-                            <tr> 
-                                <td>4</td> 
-                                <td>Réfrigérateurs</td> 
-                                <td>135</td> 
-                                <td>540</td> 
-                                <td>8</td> 
-                                <td>4320</td> 
-                            </tr> 
-                            <tr> 
-                                <td colspan="4">TOTAL</td> 
-                                <td>BESOIN</td> 
-                                <td>10,080</td> 
-                            </tr> 
-                        </tbody> 
-                    </table> 
-                </div> 
-            </div> 
-            <div class="row"> 
-                <div class="col-12"> 
-                    <p>BESOIN énergétique journalier NORMAL : 12 000 Wh/jr</p> 
-                </div> 
-            </div> 
-        </div> 
-    </body> 
-    </html>
+
+        </div>
+
+    </div>
+    <div class="content">
+        <p class="title">
+            <u>
+                DEVIS INSTALLATION SOLAIRE
+            </u>
+        </p>
+        <p style="margin-left: 20em;">
+            <strong><u>  note</u> </strong>  BACKUP HYBRIDE ET REPROFILAGE ELECTRIQUE DES APPARTEMENTS
+        </p>
+
+        <div class="services">
+            <table>
+                <tr>
+                    <th>Qté</th>
+                    <th>Désignation</th>
+                    <th>P.U.</th>
+                    <th>P.Total</th>
+                </tr>
+                @foreach(Cart::getContent() as $produit)
+                <!-- Remplacer les lignes vides par les détails réels de la facture -->
+                <tr>
+                    <td>{{$produit->quantity}}</td>
+                    <td>{{$produit->name}}</td>
+                    <td>{{$produit->price}}</td>
+                    <td>{{$produit->price * $produit->quantity}}</td>
+                </tr>
+                @endforeach
+                <!-- Ajouter d'autres lignes si nécessaire -->
+            </table>
+        </div>
+        <div class="footer" style="text-align:center">'
+            <div  class="total"> <strong style="margin-bottom: 3em; background-color:aqua">Arrêtée la présente facture à la somme de : {{Cart::getTotal()}} Francs CFA</strong></div>
+            <div style="margin-bottom: 3em;">Signature Client _________________________</div>
+            <div>Signature Vendeur</div>
+        </div>
+
+    </div>
+</body>
+</html>
